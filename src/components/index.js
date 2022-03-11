@@ -1,2 +1,5 @@
 export {default as App} from './App'
 export {default as Posts} from './Posts'
+export {default as Navbar} from './Navbar'
+export {default as Profile} from './Profile'
+export {default as Search} from './Search'

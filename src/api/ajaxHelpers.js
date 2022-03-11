@@ -4,9 +4,10 @@ export async function fetchPosts() {
   try {
     const response = await fetch(`${APIURL}posts`);
     const data = await response.json();
+    console.log(data) //= and array of objs
     return data;
-  } catch (error) {
-    throw error;
+  } catch (err) {
+    throw err;
   }
 }
 
@@ -24,7 +25,7 @@ export async function registerUser(username, password) {
     });
     const data = await response.json();
     return data;
-  } catch (e) {
-    throw e;
+  } catch (err) {
+    throw err;
   }
 }
