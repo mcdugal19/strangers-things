@@ -2,24 +2,36 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 
-import { Posts } from "./components";
+import { Posts, Navbar, NewPost, Profile, Login, Register } from "./components";
 
 function App() {
   return (
-    <div className="app">
-      <Navbar />
-      <Switch>
-        <Route path="/search">
-          <Search />
-        </Route>
-        <Route path="/posts">
+    <Router>
+      <div className="app">
+        <header>
+          <h1>Stranger's Things</h1>
+          <Navbar />
+        </header>
+        <div className="container">
           <Posts />
-        </Route>
-        <Route path="/profile">
-          <Profile />
-        </Route>
-      </Switch>
-    </div>
+          <NewPost />
+        <Switch>
+          <Route path="/posts">
+            <Posts />
+          </Route>
+          <Route path="/profile">
+            <Profile />
+          </Route>
+          <Route path="/login">
+            <Login />
+          </Route>
+          <Route path="/register">
+            <Register />
+          </Route>
+        </Switch>
+        </div>
+      </div>
+    </Router>
   );
 }
 
