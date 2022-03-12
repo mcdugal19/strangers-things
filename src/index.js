@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 
 import { Posts, Navbar, NewPost, Profile, Login, Register } from "./components";
 
 function App() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [isLoggedIn, setIsLoggedin] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState("");
 
@@ -15,68 +15,78 @@ function App() {
     <div className="app">
       <header>
         <h1>Stranger's Things</h1>
-        <Navbar />
+        <Navbar/>
       </header>
       <div className="container">
-        <Route exact path="/">
-          <Posts
-            posts={posts}
-            setPosts={setPosts}
-            isLoggedIn={isLoggedIn}
-            token={token}
-            username={username}
-          />
-          <NewPost
-            posts={posts}
-            setPosts={setPosts}
-            isLoggedIn={isLoggedIn}
-            token={token}
-            username={username}
-          />
-        </Route>
-        <Route path="/posts">
-          <Posts
-            posts={posts}
-            setPosts={setPosts}
-            isLoggedIn={isLoggedIn}
-            token={token}
-            username={username}
-          />
-          <NewPost
-            posts={posts}
-            setPosts={setPosts}
-            isLoggedIn={isLoggedIn}
-            token={token}
-            username={username}
-          />
-        </Route>
-        <Route path="/profile">
-          <Profile />
-        </Route>
-        <Route path="/login">
-          <Login
-            username={username}
-            setUsername={setUsername}
-            password={password}
-            setPassword={setPassword}
-            isLoggedIn={isLoggedIn}
-            setIsLoggedin={setIsLoggedin}
-            token={token}
-            setToken={setToken}
-          />
-        </Route>
-        <Route path="/register">
-          <Register
-            username={username}
-            setUsername={setUsername}
-            password={password}
-            setPassword={setPassword}
-            isLoggedIn={isLoggedIn}
-            setIsLoggedin={setIsLoggedin}
-            token={token}
-            setToken={setToken}
-          />
-        </Route>
+        <Switch>
+          <Route exact path="/">
+            <Posts
+              posts={posts}
+              setPosts={setPosts}
+              isLoggedIn={isLoggedIn}
+              token={token}
+              username={username}
+            />
+            <NewPost
+              posts={posts}
+              setPosts={setPosts}
+              isLoggedIn={isLoggedIn}
+              token={token}
+              username={username}
+            />
+          </Route>
+        </Switch>
+        <Switch>
+          <Route path="/posts">
+            <Posts
+              posts={posts}
+              setPosts={setPosts}
+              isLoggedIn={isLoggedIn}
+              token={token}
+              username={username}
+            />
+            <NewPost
+              posts={posts}
+              setPosts={setPosts}
+              isLoggedIn={isLoggedIn}
+              token={token}
+              username={username}
+            />
+          </Route>
+        </Switch>
+        <Switch>
+          <Route path="/profile">
+            <Profile />
+          </Route>
+        </Switch>
+        <Switch>
+          <Route path="/login">
+            <Login
+              username={username}
+              setUsername={setUsername}
+              password={password}
+              setPassword={setPassword}
+              isLoggedIn={isLoggedIn}
+              setIsLoggedIn={setIsLoggedIn}
+              token={token}
+              setToken={setToken}
+            />
+          </Route>
+        </Switch>
+        <Switch>
+          <Route path="/register">
+            <Register
+              username={username}
+              setUsername={setUsername}
+              password={password}
+              setPassword={setPassword}
+              isLoggedIn={isLoggedIn}
+              setIsLoggedIn={setIsLoggedIn}
+              token={token}
+              setToken={setToken}
+            />
+          </Route>
+        </Switch>
       </div>
     </div>
   );

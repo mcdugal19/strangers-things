@@ -17,7 +17,7 @@ const Posts = ({ posts, setPosts }) => {
         return (
           <span className="post-card" key={post._id}>
             <h3 className="post-title">{post.title}</h3>
-            <h4 className="post-username">from: {post.author.username}</h4>
+            <h4 className="post-username">From: {post.author.username}</h4>
             <p className="post-content">{post.description}</p>
             <span className="post-time">
               <p className="post-created">{post.createdAt}</p>
