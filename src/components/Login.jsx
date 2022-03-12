@@ -1,5 +1,7 @@
 import React from "react";
 
+import { registerUser } from "../api/ajaxHelpers";
+
 const Login = ({
   username,
   setUsername,
@@ -10,16 +12,29 @@ const Login = ({
 }) => {
   return (
     <div className="login-page">
+      <h2>Welcome Back</h2>
       <form
         action=""
-        onSubmit={(e) => {
+        onSubmit={async (e) => {
           e.preventDefault();
         }}
       >
         <label htmlFor="">Username:</label>
-        <input type="text" />
+        <input
+          type="text"
+          value={username}
+          onChange={(e) => {
+            setUsername(e.target.value);
+          }}
+        />
         <label htmlFor="">Password:</label>
-        <input type="password" />
+        <input
+          type="password"
+          value={password}
+          onChange={(e) => {
+            setPassword(e.target.value);
+          }}
+        />
         <button type="submit">Log in</button>
       </form>
     </div>
