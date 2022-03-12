@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 
 import { Posts, Navbar, NewPost, Profile, Login, Register } from "./components";
 
 function App() {
+  const [posts, setPosts] = useState([]);
+
   return (
     <Router>
       <div className="app">
@@ -13,22 +15,22 @@ function App() {
           <Navbar />
         </header>
         <div className="container">
-          <Posts />
+          <Posts posts={posts} setPosts={setPosts} />
           <NewPost />
-        <Switch>
-          <Route path="/posts">
-            <Posts />
-          </Route>
-          <Route path="/profile">
-            <Profile />
-          </Route>
-          <Route path="/login">
-            <Login />
-          </Route>
-          <Route path="/register">
-            <Register />
-          </Route>
-        </Switch>
+          <Switch>
+            <Route path="/posts">
+              <Posts />
+            </Route>
+            <Route path="/profile">
+              <Profile />
+            </Route>
+            <Route path="/login">
+              <Login />
+            </Route>
+            <Route path="/register">
+              <Register />
+            </Route>
+          </Switch>
         </div>
       </div>
     </Router>

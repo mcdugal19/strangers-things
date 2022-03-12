@@ -4,8 +4,7 @@ export async function fetchPosts() {
   try {
     const response = await fetch(`${APIURL}posts`);
     const data = await response.json();
-    console.log(data) //= and array of objs
-    return data;
+    return data.data.posts; //returns an array of objects
   } catch (err) {
     throw err;
   }
