@@ -29,7 +29,7 @@ export async function registerUser(username, password) {
   }
 }
 
-export async function fetchQueryResults({queryString}){
+export async function fetchQueryResults({ queryString }) {
   const url = `${APIURL}/keyword=${queryString}`;
   try {
     const response = await fetch(url);
@@ -40,3 +40,4 @@ export async function fetchQueryResults({queryString}){
     throw err;
   }
 }
+
