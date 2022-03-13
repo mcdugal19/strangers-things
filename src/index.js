@@ -15,7 +15,7 @@ function App() {
     <div className="app">
       <header>
         <h1>Stranger's Things</h1>
-        <Navbar/>
+        <Navbar />
       </header>
       <div className="container">
         <Switch>
@@ -35,8 +35,7 @@ function App() {
               username={username}
             />
           </Route>
-        </Switch>
-        <Switch>
+
           <Route path="/posts">
             <Posts
               posts={posts}
@@ -53,13 +52,11 @@ function App() {
               username={username}
             />
           </Route>
-        </Switch>
-        <Switch>
+
           <Route path="/profile">
             <Profile />
           </Route>
-        </Switch>
-        <Switch>
+
           <Route path="/login">
             <Login
               username={username}
@@ -72,8 +69,7 @@ function App() {
               setToken={setToken}
             />
           </Route>
-        </Switch>
-        <Switch>
+
           <Route path="/register">
             <Register
               username={username}
