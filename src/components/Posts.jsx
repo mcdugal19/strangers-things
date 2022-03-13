@@ -20,7 +20,7 @@ const Posts = ({ posts, setPosts }) => {
     <div className="post-page">
       {posts.map((post) => {
         return (
-          <span className="post-card" key={post._id}>
+          <div className="post-card" key={post._id}>
             <h3 className="post-title">{post.title}</h3>
             <h4 className="post-username">From: {post.author.username}</h4>
             <p className="post-content">{post.description}</p>
@@ -34,7 +34,7 @@ const Posts = ({ posts, setPosts }) => {
             <button className="button" id="message">{}Message</button>
             <button className="button" id="edit">{}Edit</button>
             <button className="button" id="delete">{}Delete</button>
-          </span>
+          </div>
         );
       })}
     </div>
