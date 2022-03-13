@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-
+import edit from "./images/edit.png";
 import { fetchPosts } from "../api/ajaxHelpers";
 
 const Posts = ({ posts, setPosts }) => {
@@ -31,9 +31,9 @@ const Posts = ({ posts, setPosts }) => {
                 <p className="post-updated">Last Updated On:{post.updatedAt}</p>
               ) : null}
             </span>
-            <button className="button" id="message">Message</button>
-            <button className="button" id="edit">Edit</button>
-            <button className="button" id="delete">Delete</button>
+            <button className="button" id="message">{}Message</button>
+            <button className="button" id="edit">{}Edit</button>
+            <button className="button" id="delete">{}Delete</button>
           </span>
         );
       })}
