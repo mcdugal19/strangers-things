@@ -11,6 +11,11 @@ const Posts = ({ posts, setPosts }) => {
     getPosts();
   }, []);
 
+    // function convertTime(){
+    //     let {post.createdAt} = APItime;
+    //     let displayTime = 
+    // }
+
   return (
     <div className="post-page">
       {posts.map((post) => {
@@ -20,11 +25,15 @@ const Posts = ({ posts, setPosts }) => {
             <h4 className="post-username">From: {post.author.username}</h4>
             <p className="post-content">{post.description}</p>
             <span className="post-time">
-              <p className="post-created">{post.createdAt}</p>
+                {console.log(post.createdAt)}
+              <p className="post-created">Created On:{post.createdAt}</p>
               {post.updatedAt ? (
-                <p className="post-updated">{post.updatedAt}</p>
+                <p className="post-updated">Last Updated On:{post.updatedAt}</p>
               ) : null}
             </span>
+            <button className="button" id="message">Message</button>
+            <button className="button" id="edit">Edit</button>
+            <button className="button" id="delete">Delete</button>
           </span>
         );
       })}

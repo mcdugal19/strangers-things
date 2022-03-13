@@ -28,3 +28,15 @@ export async function registerUser(username, password) {
     throw err;
   }
 }
+
+export async function fetchQueryResults({queryString}){
+  const url = `${APIURL}/keyword=${queryString}`;
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+
+    return data;
+  } catch (err) {
+    throw err;
+  }
+}
