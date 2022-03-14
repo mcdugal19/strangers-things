@@ -31,6 +31,7 @@ header {
   display: flex;
   flex-direction: column;
   align-items: center;
+  color: #03258c;
 }
 
 .navbar {
@@ -54,6 +55,10 @@ header {
   list-style: none;
 }
 
+h2 {
+  color: #03258c;
+}
+
 /* POST BODY */
 .container {
   display: flex;
@@ -61,6 +66,7 @@ header {
   justify-content: space-around;
   padding: 0;
 }
+
 
 .post-page {
   background-color: #7789bf;
@@ -73,6 +79,10 @@ header {
     background-color: #f2f2f2;
     padding: 0.5rem;
     margin: 0.5rem;
+}
+
+.post-title {
+  color: #03258c;
 }
 
 .button {
@@ -118,6 +128,7 @@ header {
   padding: 0.5rem;
   background-color: #7789bf;
   height: fit-content;
+  color: #03258c;
 }
 
 .newpost-form {
@@ -126,6 +137,7 @@ header {
   background-color: #f2f2f2;
   display: flex;
   flex-direction: column;
+  color: #03258c;
 }
 
 .newpost-form input,
@@ -142,6 +154,7 @@ header {
 
 .newpost-form button {
   align-self: flex-end;
+  color: #03258c;
 }
 
 /* REGISTER SPECIFIC */
@@ -150,6 +163,7 @@ header {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
+    color: #03258c;
 }
 
 .register-page input,
@@ -157,6 +171,12 @@ header {
   padding: 0.5rem;
   border: 2px solid #1f3b73;
   margin-bottom: 1rem;
+  color: #03258c;
+}
+
+.register-form button {
+  align-self: flex-end;
+  color: #03258c;
 }
 
 /* LOGIN SPECIFIC */
