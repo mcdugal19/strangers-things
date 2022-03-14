@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 
@@ -11,6 +11,14 @@ function App() {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState("");
   const [userPosts, setUserPosts] = useState([]);
+
+
+  useEffect(() => {
+    const localStorageToken = localStorage.getItem('token')
+    if (localStorageToken !== '') { setToken(localStorageToken)}
+  }, [token])
+
+
 
   return (
     <div className="app">

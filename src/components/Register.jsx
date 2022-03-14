@@ -9,6 +9,8 @@ const Register = ({
   setPassword,
   token,
   setToken,
+  isLoggedIn,
+  setIsLoggedIn
 }) => {
   return (
     <div className="register-page">
@@ -21,7 +23,8 @@ const Register = ({
             e.preventDefault();
             try {
               const response = await registerUser(username, password);
-              setToken(response.data.token)
+              localStorage.setItem('token', response)
+              setIsLoggedIn(true)
             } catch (error) {
               console.error(
                 "There was a problem with your registration.",

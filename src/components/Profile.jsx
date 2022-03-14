@@ -3,14 +3,14 @@ import { BrowserRouter as Router } from "react-router-dom";
 import deleteTrash from "./images/deleteTrash.png";
 import editPencil from "./images/editPencil.png";
 import sendMessage from "./images/sendMessage.png";
-import { fetchUserPosts } from "../api/ajaxHelpers";
+import { fetchUserData } from "../api/ajaxHelpers";
 // import {posts, setPosts, isLoggedIn, token, username} from "";
 // import {Search} from "./Search.jsx";
 
 const Profile = ({ userPosts, setUserPosts, isLoggedIn, token, username }) => {
   useEffect(() => {
     const getUserPosts = async () => {
-      const userPostsArray = await fetchUserPosts();
+      const userPostsArray = await fetchUserData(token);
       setUserPosts(userPostsArray);
     };
     getUserPosts();

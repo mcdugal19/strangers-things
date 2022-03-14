@@ -1,6 +1,6 @@
 import React from "react";
 
-import { registerUser } from "../api/ajaxHelpers";
+import { fetchUserToken, } from "../api/ajaxHelpers";
 
 const Login = ({
   username,
@@ -9,6 +9,8 @@ const Login = ({
   setPassword,
   token,
   setToken,
+  isLoggedIn,
+  setIsLoggedIn,
 }) => {
   return (
     <div className="login-page">
@@ -18,6 +20,16 @@ const Login = ({
         action=""
         onSubmit={async (e) => {
           e.preventDefault();
+          try {
+            const response = await fetchUserToken(username, password);
+            localStorage.setItem('token', response)
+            setIsLoggedIn(true)
+          } catch (error) {
+            console.error(
+              "There was a problem with your login information.",
+              error
+            );
+          }
         }}
       >
         
@@ -40,6 +52,12 @@ const Login = ({
         />
         <button type="submit">Log in</button>
       </form>
+      </div>
+      <div className="login-confirmation" style={{ 
+      display: isLoggedIn ? 'block' : 'none',}}>
+        <h3>
+          WELCOME BACK
+        </h3>
       </div>
     </div>
   );

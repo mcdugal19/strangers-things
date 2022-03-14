@@ -4,21 +4,29 @@ export async function fetchPosts() {
   try {
     const response = await fetch(`${APIURL}posts`);
     const data = await response.json();
-    return data.data.posts; //returns an array of objects
+    return data.data.posts; 
   } catch (err) {
     throw err;
   }
 }
 
-export async function fetchUserPosts() {
+export async function fetchUserData(token) {
   try {
-    const response = await fetch(`${APIURL}posts`);
+    const response = await fetch(`${APIURL}users/me`, {
+      headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    }
+
+    });
     const data = await response.json();
-    return data.data.posts; //returns an array of objects
+    return data; 
   } catch (err) {
     throw err;
   }
 }
+
+
 
 export async function registerUser(username, password) {
   try {
@@ -39,6 +47,25 @@ export async function registerUser(username, password) {
   }
 }
 
+export async function fetchUserToken(username, password) {
+  try {
+    const response = await fetch(`${APIURL}users/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        user: {
+          username,
+          password,
+        },
+      }),
+    });
+    const data = await response.json();
+    return data.data.token;
+  } catch (err) {
+    throw err;
+  }
+}
+
 export async function fetchQueryResults({ queryString }) {
   const url = `${APIURL}/keyword=${queryString}`;
   try {
@@ -50,4 +77,3 @@ export async function fetchQueryResults({ queryString }) {
     throw err;
   }
 }
-
