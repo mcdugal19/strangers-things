@@ -13,6 +13,7 @@ const Register = ({
   return (
     <div className="register-page">
       <h2>Welcome to Stranger's Things</h2>
+      
       <div className="form-container">
         <form
           action=""

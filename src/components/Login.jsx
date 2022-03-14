@@ -13,30 +13,34 @@ const Login = ({
   return (
     <div className="login-page">
       <h2>Welcome Back</h2>
+      <div className="form-container">
       <form
         action=""
         onSubmit={async (e) => {
           e.preventDefault();
         }}
       >
-        <label htmlFor="">Username:</label>
+        
         <input
           type="text"
           value={username}
+          placeholder="Username"
           onChange={(e) => {
             setUsername(e.target.value);
           }}
         />
-        <label htmlFor="">Password:</label>
+        
         <input
           type="password"
           value={password}
+          placeholder="Password"
           onChange={(e) => {
             setPassword(e.target.value);
           }}
         />
         <button type="submit">Log in</button>
       </form>
+      </div>
     </div>
   );
 };

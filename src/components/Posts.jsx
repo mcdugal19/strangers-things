@@ -25,7 +25,9 @@ const Posts = ({ posts, setPosts, isLoggedIn, token, username }) => {
           <div className="post-card" key={post._id}>
             <h3 className="post-title">{post.title}</h3>
             <h4 className="post-username">Posted by: {post.author.username}</h4>
+            <br/>
             <h5 className="post-price">Price: {post.price}</h5>
+            <br/>
             <p className="post-content">{post.description}</p>
             <br/>
             <span className="post-time">
@@ -36,6 +38,7 @@ const Posts = ({ posts, setPosts, isLoggedIn, token, username }) => {
                 </p>
               ) : null}
             </span>
+            <br/>
             <button className="post-button" id="message">
               {<img src={sendMessage} alt="message icon"/>} Message
             </button>

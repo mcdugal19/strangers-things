@@ -10,6 +10,16 @@ export async function fetchPosts() {
   }
 }
 
+export async function fetchUserPosts() {
+  try {
+    const response = await fetch(`${APIURL}posts`);
+    const data = await response.json();
+    return data.data.posts; //returns an array of objects
+  } catch (err) {
+    throw err;
+  }
+}
+
 export async function registerUser(username, password) {
   try {
     const response = await fetch(`${APIURL}users/register`, {

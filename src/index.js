@@ -16,6 +16,7 @@ function App() {
       <header>
         <h1>Stranger's Things</h1>
         <Navbar />
+        <br/>
       </header>
       <div className="container">
         <Switch>
@@ -53,6 +54,10 @@ function App() {
             />
           </Route>
 
+          <Route path="/NewPost">
+            <NewPost />
+          </Route>
+          
           <Route path="/profile">
             <Profile />
           </Route>
