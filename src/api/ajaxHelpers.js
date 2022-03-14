@@ -4,7 +4,7 @@ export async function fetchPosts() {
   try {
     const response = await fetch(`${APIURL}posts`);
     const data = await response.json();
-    return data.data.posts; 
+    return data.data.posts;
   } catch (err) {
     throw err;
   }
@@ -14,19 +14,16 @@ export async function fetchUserData(token) {
   try {
     const response = await fetch(`${APIURL}users/me`, {
       headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
-    }
-
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`,
+      },
     });
     const data = await response.json();
-    return data; 
+    return data;
   } catch (err) {
     throw err;
   }
 }
-
-
 
 export async function registerUser(username, password) {
   try {

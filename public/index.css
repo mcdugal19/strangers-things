@@ -189,3 +189,9 @@ h2 {
 }
 
 
+/* Profile Page */
+
+.profile-page {
+  width: 100%;
+  display: flex;
+}

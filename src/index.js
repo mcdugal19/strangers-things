@@ -11,6 +11,7 @@ function App() {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState("");
   const [userPosts, setUserPosts] = useState([]);
+  const [userMessages, setUserMessages] = useState([])
 
 
   useEffect(() => {
@@ -74,6 +75,9 @@ function App() {
             isLoggedIn={isLoggedIn}
             token={token}
             username={username}
+            userMessages={userMessages}
+            setUserMessages={setUserMessages}
+            setToken={setToken}
             />
           </Route>
 
