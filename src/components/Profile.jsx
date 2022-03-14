@@ -7,17 +7,17 @@ import { fetchUserPosts } from "../api/ajaxHelpers";
 // import {posts, setPosts, isLoggedIn, token, username} from "";
 // import {Search} from "./Search.jsx";
 
-const Profile = ({ posts, setUserPosts, isLoggedIn, token, username }) => {
+const Profile = ({ userPosts, setUserPosts, isLoggedIn, token, username }) => {
   useEffect(() => {
     const getUserPosts = async () => {
       const userPostsArray = await fetchUserPosts();
       setUserPosts(userPostsArray);
     };
     getUserPosts();
-  }, [posts]);
+  }, [userPosts]);
   return (
       <div className="profile-page">
-        {posts.map((post) => {
+        {userPosts.map((post) => {
           return (
             <div className="post-card" key={post._id}>
               <h3 className="post-title">{post.title}</h3>

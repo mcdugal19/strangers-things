@@ -10,6 +10,7 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState("");
+  const [userPosts, setUserPosts] = useState([]);
 
   return (
     <div className="app">
@@ -59,7 +60,13 @@ function App() {
           </Route>
           
           <Route path="/profile">
-            <Profile />
+            <Profile 
+            userPosts={userPosts}
+            setUserPosts={setUserPosts}
+            isLoggedIn={isLoggedIn}
+            token={token}
+            username={username}
+            />
           </Route>
 
           <Route path="/login">
