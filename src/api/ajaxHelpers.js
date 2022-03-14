@@ -15,7 +15,7 @@ export async function fetchUserData(token) {
     const response = await fetch(`${APIURL}users/me`, {
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       },
     });
     const data = await response.json();
@@ -73,4 +73,25 @@ export async function fetchQueryResults({ queryString }) {
   } catch (err) {
     throw err;
   }
+}
+
+export async function createPost(postObj, token) {
+  const response = await fetch(`${APIURL}posts`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      post: {
+        title: postObj.title,
+        description: postObj.description,
+        location: postObj.location,
+        price: postObj.price,
+        willDeliver: postObj.willDeliver,
+      },
+    }),
+  });
+  const data = await response.json()
+  return data
 }
