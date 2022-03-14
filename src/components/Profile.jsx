@@ -59,9 +59,6 @@ const Profile = ({
                     ) : null}
                   </span>
                   <br />
-                  <button className="post-button" id="message">
-                    {<img src={sendMessage} alt="message icon" />} Message
-                  </button>
                   <button className="post-button" id="edit">
                     {<img src={editPencil} alt="pencil icon" />}Edit
                   </button>

@@ -79,8 +79,8 @@ export async function createPost(postObj, token) {
   const response = await fetch(`${APIURL}posts`, {
     method: "POST",
     headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
+      'Content-Type': "application/json",
+      'Authorization': `Bearer ${token}`,
     },
     body: JSON.stringify({
       post: {
