@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import { Posts, Navbar, NewPost, Profile, Login, Register } from "./components";
 
@@ -74,6 +74,7 @@ function App() {
               isLoggedIn={isLoggedIn}
               token={token}
               username={username}
+              setUsername={setUsername}
               userMessages={userMessages}
               setUserMessages={setUserMessages}
               setToken={setToken}

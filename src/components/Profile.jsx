@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import deleteTrash from "./images/deleteTrash.png";
 import editPencil from "./images/editPencil.png";
-import sendMessage from "./images/sendMessage.png";
-import { fetchUserData } from "../api/ajaxHelpers";
+import { fetchUserData, sendMessage } from "../api/ajaxHelpers";
 // import {posts, setPosts, isLoggedIn, token, username} from "";
 // import {Search} from "./Search.jsx";
 
@@ -13,10 +12,14 @@ const Profile = ({
   isLoggedIn,
   token,
   username,
+  setUsername,
   userMessages,
   setUserMessages,
   setToken,
 }) => {
+  const [reply, setReply] = useState("");
+  const [replySent, setReplySent] = useState(false)
+
   useEffect(() => {
     const getUserData = async () => {
       if (isLoggedIn) {
@@ -24,6 +27,7 @@ const Profile = ({
         console.log(response);
         setUserPosts(response.data.posts);
         setUserMessages(response.data.messages);
+        setUsername(response.data.username);
       } else {
         console.log("didn't work");
       }
@@ -32,77 +36,93 @@ const Profile = ({
   }, []);
 
   return (
-    
     <div className="container">
       {!isLoggedIn ? (
-        <div className="post-page">Please log in/register to create posts
-        or send messages.</div>
-      ) : (
-      <div className="profile-page">
         <div className="post-page">
-          {userPosts.length === 0 ? (
-            <h2>No Posts Yet</h2>
-          ) : (
-            userPosts.map((post) => {
-              return (
-                <div className="post-card" key={post._id}>
-                  <h3 className="post-title">{post.title}</h3>
-                  <h4 className="post-username">
-                    Posted by: {post.author.username}
-                  </h4>
-                  <br />
-                  <h5 className="post-price">Price: {post.price}</h5>
-                  <br />
-                  <p className="post-content">{post.description}</p>
-                  <br />
-                  <span className="post-time">
-                    <p className="post-created">Created On: {post.createdAt}</p>
-                    {post.updatedAt !== post.createdAt ? (
-                      <p className="post-updated">
-                        Last Updated On: {post.updatedAt}
+          Please log in/register to create posts or send messages.
+        </div>
+      ) : (
+        <div className="profile-page">
+          <div className="post-page">
+            {userPosts.length === 0 ? (
+              <h2>No Posts Yet</h2>
+            ) : (
+              userPosts.map((post) => {
+                return (
+                  <div className="post-card" key={post._id}>
+                    <h3 className="post-title">{post.title}</h3>
+                    <h4 className="post-username">
+                      Posted by: {post.author.username}
+                    </h4>
+                    <br />
+                    <h5 className="post-price">Price: {post.price}</h5>
+                    <br />
+                    <p className="post-content">{post.description}</p>
+                    <br />
+                    <span className="post-time">
+                      <p className="post-created">
+                        Created On: {post.createdAt}
                       </p>
-                    ) : null}
-                  </span>
-                  <br />
-                  <button className="post-button" id="edit">
-                    {<img src={editPencil} alt="pencil icon" />}Edit
-                  </button>
-                  <button className="post-button" id="delete">
-                    {<img src={deleteTrash} alt="trash icon" />}Delete
-                  </button>
-                </div>
-              );
-            })
-          )}
+                      {post.updatedAt !== post.createdAt ? (
+                        <p className="post-updated">
+                          Last Updated On: {post.updatedAt}
+                        </p>
+                      ) : null}
+                    </span>
+                    <br />
+                    <button className="post-button" id="edit">
+                      {<img src={editPencil} alt="pencil icon" />}Edit
+                    </button>
+                    <button className="post-button" id="delete">
+                      {<img src={deleteTrash} alt="trash icon" />}Delete
+                    </button>
+                  </div>
+                );
+              })
+            )}
+          </div>
+          <div className="newpost-page">
+            {userMessages.length === 0 ? (
+              <h2>No Messages Yet</h2>
+            ) : (
+              userMessages.map((message, i) => {
+                return (
+                  <div className="message-card" key={i}>
+                    <h3>Post: {message.post.title}</h3>
+                    <h4>From: {message.fromUser.username}</h4>
+                    <br />
+                    <p>{message.content}</p>
+                    <br />
+                    {userMessages[i].fromUser.username === username ? null : (
+                      <>
+                      <form
+                        onSubmit={(e) => {
+                          e.preventDefault();
+                          sendMessage(reply, message.post._id, token);
+                          setReplySent(true)
+                        }}
+                      >
+                        <input
+                          type="text"
+                          value={reply}
+                          onChange={(e) => {
+                            setReply(e.target.value);
+                          }}
+                        />
+                        <button type="submit">Reply</button>
+                      </form>
+                      <div>
+                      {replySent ? 
+                      "Reply Sent!" : null}
+                      </div>
+                      </>
+                    )}
+                  </div>
+                );
+              })
+            )}
+          </div>
         </div>
-        <div className="newpost-page">
-          {userMessages.length === 0 ? (
-            <h2>No Messages Yet</h2>
-          ) : (
-            userMessages.map((message) => {
-              return (
-                <div className="message-card" key={message._id}>
-                  <h3>Post: {message.post.title}</h3>
-                  <h4>From: {message.fromUser.username}</h4>
-                  <br />
-                  <p>{message.content}</p>
-                  <br />
-                  <form
-                    action=""
-                    onSubmit={(e) => {
-                      e.preventDefault();
-                      // sendMessage(messageObj)
-                    }}
-                  >
-                    <input type="text" />
-                    <button type="submit">Reply</button>
-                  </form>
-                </div>
-              );
-            })
-          )}
-        </div>
-      </div>
       )}
     </div>
   );

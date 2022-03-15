@@ -106,7 +106,6 @@ export async function sendMessage(message, postId, token) {
     body: JSON.stringify({
       message: {
         content: message,
-
       },
     }),
   });
