@@ -76,7 +76,6 @@ export async function fetchQueryResults({ queryString }) {
 }
 
 export async function createPost(postObj, token) {
-  console.log(token, "from API/createPost")
   const response = await fetch(`${APIURL}posts`, {
     method: "POST",
     headers: {
@@ -96,3 +95,22 @@ export async function createPost(postObj, token) {
   const data = await response.json()
   return data
 }
+
+export async function sendMessage(message, postId, token) {
+  const response = await fetch(`${APIURL}posts/${postId}/messages`, {
+    method: "POST",
+    headers: {
+      'Content-Type': "application/json",
+      'Authorization': `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      message: {
+        content: message,
+
+      },
+    }),
+  });
+  const data = await response.json()
+  return data
+}
+

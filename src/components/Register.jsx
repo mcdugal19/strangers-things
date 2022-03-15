@@ -10,12 +10,12 @@ const Register = ({
   token,
   setToken,
   isLoggedIn,
-  setIsLoggedIn
+  setIsLoggedIn,
 }) => {
   return (
     <div className="register-page">
       <h2>Welcome to Stranger's Things</h2>
-      
+
       <div className="form-container">
         <form
           action=""
@@ -23,8 +23,8 @@ const Register = ({
             e.preventDefault();
             try {
               const response = await registerUser(username, password);
-              localStorage.setItem('token', response)
-              setIsLoggedIn(true)
+              localStorage.setItem("token", response);
+              setIsLoggedIn(true);
             } catch (error) {
               console.error(
                 "There was a problem with your registration.",
@@ -50,6 +50,14 @@ const Register = ({
             }}
           />
           <button type="submit">Sign Up</button>
+          <div
+            className="login-confirmation"
+            style={{
+              display: isLoggedIn ? "block" : "none",
+            }}
+          >
+            <h3>WELCOME TO STRANGER'S THINGS!</h3>
+          </div>
         </form>
       </div>
     </div>

@@ -5,6 +5,8 @@ import sendMessage from "./images/sendMessage.png";
 import { fetchPosts } from "../api/ajaxHelpers";
 
 const Posts = ({ posts, setPosts, isLoggedIn, token, username }) => {
+const [message, setMessage] = useState("")
+
   useEffect(() => {
     const getPosts = async () => {
       const postsArray = await fetchPosts();
@@ -42,7 +44,12 @@ const Posts = ({ posts, setPosts, isLoggedIn, token, username }) => {
               ) : null}
             </span>
             <br/>
-            <button className="post-button" id="message">
+            <button className="post-button" id="message" onClick={(e)=>{
+              e.preventDefault();
+              function displayMessageForm(){ document.getElementsByClassName("message-form").style={ 
+                display: 'block'}}
+              displayMessageForm()
+            }}>
               {<img src={sendMessage} alt="message icon"/>} Message
             </button>
             <button className="post-button" id="edit">
@@ -51,6 +58,15 @@ const Posts = ({ posts, setPosts, isLoggedIn, token, username }) => {
             <button className="post-button" id="delete">
               {<img src={deleteTrash} alt="trash icon" />}Delete
             </button>
+            <div className="message-form">
+                <form onSubmit={(e)=>{
+                  e.preventDefault();
+                  sendMessage( message, post._id, token )
+                }}>
+                  <input type="text" value={message} onChange = {(e)=>{setMessage(e.target.value)}}/>
+                  <button type="submit">Message</button>
+                </form>
+            </div>  
           </div>
         );
       })}

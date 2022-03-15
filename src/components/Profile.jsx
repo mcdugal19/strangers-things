@@ -32,7 +32,12 @@ const Profile = ({
   }, []);
 
   return (
+    
     <div className="container">
+      {!isLoggedIn ? (
+        <div className="post-page">Please log in/register to create posts
+        or send messages.</div>
+      ) : (
       <div className="profile-page">
         <div className="post-page">
           {userPosts.length === 0 ? (
@@ -98,6 +103,7 @@ const Profile = ({
           )}
         </div>
       </div>
+      )}
     </div>
   );
 };
