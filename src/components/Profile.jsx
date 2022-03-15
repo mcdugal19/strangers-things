@@ -18,7 +18,8 @@ const Profile = ({
   setToken,
 }) => {
   const [reply, setReply] = useState("");
-  const [replySent, setReplySent] = useState(false)
+  const [replySent, setReplySent] = useState(false);
+  setUsername("");
 
   useEffect(() => {
     const getUserData = async () => {
@@ -28,6 +29,7 @@ const Profile = ({
         setUserPosts(response.data.posts);
         setUserMessages(response.data.messages);
         setUsername(response.data.username);
+        console.log(response.data.username, "inside use effect");
       } else {
         console.log("didn't work");
       }
@@ -92,31 +94,28 @@ const Profile = ({
                     <h4>From: {message.fromUser.username}</h4>
                     <br />
                     <p>{message.content}</p>
-                    <br />
-                    {userMessages[i].fromUser.username === username ? null : (
+                    <br /> 
+                    {/* {userMessages[i].fromUser.username === username ? null : (
                       <>
-                      <form
-                        onSubmit={(e) => {
-                          e.preventDefault();
-                          sendMessage(reply, message.post._id, token);
-                          setReplySent(true)
-                        }}
-                      >
-                        <input
-                          type="text"
-                          value={reply}
-                          onChange={(e) => {
-                            setReply(e.target.value);
+                        <form
+                          onSubmit={(e) => {
+                            e.preventDefault();
+                            sendMessage(reply, message.post._id, token);
+                            setReplySent(true);
                           }}
-                        />
-                        <button type="submit">Reply</button>
-                      </form>
-                      <div>
-                      {replySent ? 
-                      "Reply Sent!" : null}
-                      </div>
+                        >
+                          <input
+                            type="text"
+                            value={reply}
+                            onChange={(e) => {
+                              setReply(e.target.value);
+                            }}
+                          />
+                          <button type="submit">Reply</button>
+                        </form>
+                        <div>{replySent ? "Reply Sent!" : null}</div>
                       </>
-                    )}
+                    )} */}
                   </div>
                 );
               })

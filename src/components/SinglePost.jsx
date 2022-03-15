@@ -2,12 +2,17 @@ import React, { useState } from "react";
 import deleteTrash from "./images/deleteTrash.png";
 import editPencil from "./images/editPencil.png";
 import mailIcon from "./images/mailIcon.png";
-import { sendMessage } from "../api/ajaxHelpers";
+import { sendMessage, deletePost } from "../api/ajaxHelpers";
 
 const SinglePost = ({ post, token }) => {
   const [message, setMessage] = useState("");
   const [clickedMessage, setClickedMessage] = useState(false);
   const [messageSent, setMessageSent] = useState(false);
+  const [editPostCard, setEditPostCard] = useState("");
+  const [clickedEditCard, setClickedEditPostCard] = useState(false);
+  const [PostEdited, setPostEdited] = useState(false);
+  // const [clickedDelete, setClickedDelete] = useState(false);
+  const [postDeleted, setPostDeleted] = useState(false);
 
   return (
     <div className="post-card">
@@ -44,7 +49,11 @@ const SinglePost = ({ post, token }) => {
         {<img src={editPencil} alt="pencil icon" />}Edit
       </button>
       <button className="post-button" id="delete">
-        {<img src={deleteTrash} alt="trash icon" />}Delete
+        {<img src={deleteTrash} alt="trash icon" onClick={(e) => {
+          e.preventDefault();
+          setPostDeleted(true);
+          deletePost(post._id, token);
+        }}/>}Delete
       </button>
       <div className="message-form">
         {clickedMessage ? (
@@ -69,6 +78,7 @@ const SinglePost = ({ post, token }) => {
         ) : null}
       </div>
       <div className="message-sent">{messageSent ? "Message Sent" : null}</div>
+      <div className="post-deleted">{postDeleted ? "Post Deleted" : null}</div>
     </div>
   );
 };
