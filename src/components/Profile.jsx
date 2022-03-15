@@ -3,6 +3,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import deleteTrash from "./images/deleteTrash.png";
 import editPencil from "./images/editPencil.png";
 import { fetchUserData, sendMessage } from "../api/ajaxHelpers";
+import Messages from "./Messages";
 // import {posts, setPosts, isLoggedIn, token, username} from "";
 // import {Search} from "./Search.jsx";
 
@@ -17,9 +18,7 @@ const Profile = ({
   setUserMessages,
   setToken,
 }) => {
-  const [reply, setReply] = useState("");
-  const [replySent, setReplySent] = useState(false);
-  setUsername("");
+  
 
   useEffect(() => {
     const getUserData = async () => {
@@ -95,27 +94,12 @@ const Profile = ({
                     <br />
                     <p>{message.content}</p>
                     <br /> 
-                    {/* {userMessages[i].fromUser.username === username ? null : (
-                      <>
-                        <form
-                          onSubmit={(e) => {
-                            e.preventDefault();
-                            sendMessage(reply, message.post._id, token);
-                            setReplySent(true);
-                          }}
-                        >
-                          <input
-                            type="text"
-                            value={reply}
-                            onChange={(e) => {
-                              setReply(e.target.value);
-                            }}
-                          />
-                          <button type="submit">Reply</button>
-                        </form>
-                        <div>{replySent ? "Reply Sent!" : null}</div>
-                      </>
-                    )} */}
+                    {userMessages[i].fromUser.username === username ? null : (
+                      <Messages 
+                      token={token}
+                      message={message}
+                      />
+                    )}
                   </div>
                 );
               })
