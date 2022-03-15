@@ -11,22 +11,21 @@ function App() {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState("");
   const [userPosts, setUserPosts] = useState([]);
-  const [userMessages, setUserMessages] = useState([])
-
+  const [userMessages, setUserMessages] = useState([]);
 
   useEffect(() => {
-    const localStorageToken = localStorage.getItem('token')
-    if (localStorageToken !== '') { setToken(localStorageToken)}
-  }, [token])
-
-
+    const localStorageToken = localStorage.getItem("token");
+    if (localStorageToken) {
+      setToken(localStorageToken);
+    }
+  }, []);
 
   return (
     <div className="app">
       <header>
         <h1>Stranger's Things</h1>
         <Navbar />
-        <br/>
+        <br />
       </header>
       <div className="container">
         <Switch>
@@ -67,17 +66,17 @@ function App() {
           <Route path="/NewPost">
             <NewPost />
           </Route>
-          
+
           <Route path="/profile">
-            <Profile 
-            userPosts={userPosts}
-            setUserPosts={setUserPosts}
-            isLoggedIn={isLoggedIn}
-            token={token}
-            username={username}
-            userMessages={userMessages}
-            setUserMessages={setUserMessages}
-            setToken={setToken}
+            <Profile
+              userPosts={userPosts}
+              setUserPosts={setUserPosts}
+              isLoggedIn={isLoggedIn}
+              token={token}
+              username={username}
+              userMessages={userMessages}
+              setUserMessages={setUserMessages}
+              setToken={setToken}
             />
           </Route>
 

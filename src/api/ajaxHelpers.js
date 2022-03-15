@@ -76,6 +76,7 @@ export async function fetchQueryResults({ queryString }) {
 }
 
 export async function createPost(postObj, token) {
+  console.log(token, "from API/createPost")
   const response = await fetch(`${APIURL}posts`, {
     method: "POST",
     headers: {
