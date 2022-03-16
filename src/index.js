@@ -18,7 +18,7 @@ function App() {
     if (localStorageToken) {
       setToken(localStorageToken);
     }
-  }, []);
+  }, [token]);
   console.log('token', token)
 
   return (

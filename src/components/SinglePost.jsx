@@ -5,7 +5,7 @@ import mailIcon from "./images/mailIcon.png";
 import { sendMessage, deletePost } from "../api/ajaxHelpers";
 import EditPostCard from "./EditPostCard";
 
-const SinglePost = ({ post, token, isLoggedIn, username }) => {
+const SinglePost = ({ post, token, isLoggedIn, username, posts, setPosts }) => {
   const [message, setMessage] = useState("");
   const [clickedMessage, setClickedMessage] = useState(false);
   const [messageSent, setMessageSent] = useState(false);
@@ -104,7 +104,7 @@ const SinglePost = ({ post, token, isLoggedIn, username }) => {
         </>
       ) : null}
       <div className="editpost-form">
-        {clickedEdit ? <EditPostCard token={token} post={post} /> : null}
+        {clickedEdit ? <EditPostCard setClickedEdit={setClickedEdit} posts={posts} setPosts={setPosts} token={token} post={post} /> : null}
       </div>
       <div className="message-form">{clickedMessage ? messageForm : null}</div>
       <div className="message-sent">{messageSent ? "Message Sent" : null}</div>

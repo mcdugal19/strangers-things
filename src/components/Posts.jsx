@@ -11,7 +11,7 @@ const Posts = ({ posts, setPosts, isLoggedIn, token, username }) => {
       setPosts(postsArray);
     };
     getPosts();
-  }, []);
+  }, [setPosts]);
 
 
   return (
@@ -24,6 +24,8 @@ const Posts = ({ posts, setPosts, isLoggedIn, token, username }) => {
             token={token}
             isLoggedIn={isLoggedIn}
             username={username}
+            posts={posts}
+            setPosts={setPosts}
           />
         );
       })}

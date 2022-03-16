@@ -9,6 +9,8 @@ const Login = ({
   setPassword,
   isLoggedIn,
   setIsLoggedIn,
+  token,
+  setToken
 }) => {
   return (
     <div className="login-page">
