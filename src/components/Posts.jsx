@@ -22,6 +22,8 @@ const Posts = ({ posts, setPosts, isLoggedIn, token, username }) => {
             key={i}
             post={post}
             token={token}
+            isLoggedin={isLoggedIn}
+            username={username}
           />
         );
       })}

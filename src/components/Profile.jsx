@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router } from "react-router-dom";
 import deleteTrash from "./images/deleteTrash.png";
 import editPencil from "./images/editPencil.png";
-import { fetchUserData, sendMessage } from "../api/ajaxHelpers";
+import { fetchUserData, sendMessage, deletePost } from "../api/ajaxHelpers";
 import Messages from "./Messages";
 // import {posts, setPosts, isLoggedIn, token, username} from "";
 // import {Search} from "./Search.jsx";
@@ -18,19 +17,20 @@ const Profile = ({
   setUserMessages,
   setToken,
 }) => {
-  
+  const [profilePostDeleted, setProfilePostDeleted] = useState(false);
 
   useEffect(() => {
     const getUserData = async () => {
-      if (isLoggedIn) {
-        const response = await fetchUserData(token);
-        console.log(response);
-        setUserPosts(response.data.posts);
-        setUserMessages(response.data.messages);
-        setUsername(response.data.username);
-        console.log(response.data.username, "inside use effect");
-      } else {
-        console.log("didn't work");
+      try {
+        if (isLoggedIn) {
+          const response = await fetchUserData(token);
+          console.log(response);
+          setUserPosts(response.data.posts);
+          setUserMessages(response.data.messages);
+          setUsername(response.data.username);
+        }
+      } catch (err) {
+        console.error("There was an issue retrieving user information", err);
       }
     };
     getUserData();
@@ -51,10 +51,26 @@ const Profile = ({
               userPosts.map((post) => {
                 return (
                   <div className="post-card" key={post._id}>
-                    <h3 className="post-title">{post.title}</h3>
-                    <h4 className="post-username">
-                      Posted by: {post.author.username}
-                    </h4>
+                    {!post.active ? (
+                      <>
+                        <h3
+                          className="post-title"
+                          style={{
+                            textDecorationLine: "line-through",
+                            textDecorationStyle: "solid",
+                          }}
+                        >
+                          {post.title}
+                        </h3>
+                        <p style={{ color: "red" }}>Post Deleted</p>
+                      </>
+                    ) : (
+                      <h3 className="post-title">{post.title}</h3>
+                    )}
+                    <h5 className="post-location">Location: {post.location}</h5>
+                    <h6 className="post-deliver">
+                      Will deliver? {post.willDeliver ? "Yes" : "No"}
+                    </h6>
                     <br />
                     <h5 className="post-price">Price: {post.price}</h5>
                     <br />
@@ -62,21 +78,37 @@ const Profile = ({
                     <br />
                     <span className="post-time">
                       <p className="post-created">
-                        Created On: {post.createdAt}
+                        Created On: {new Date(post.createdAt).toLocaleString()}
                       </p>
                       {post.updatedAt !== post.createdAt ? (
                         <p className="post-updated">
-                          Last Updated On: {post.updatedAt}
+                          Last Updated On:{" "}
+                          {new Date(post.updatedAt).toLocaleString()}
                         </p>
                       ) : null}
                     </span>
                     <br />
-                    <button className="post-button" id="edit">
-                      {<img src={editPencil} alt="pencil icon" />}Edit
-                    </button>
-                    <button className="post-button" id="delete">
-                      {<img src={deleteTrash} alt="trash icon" />}Delete
-                    </button>
+                    {!post.active ? null : (
+                      <>
+                        <button className="post-button" id="edit">
+                          {<img src={editPencil} alt="pencil icon" />}Edit
+                        </button>
+                        <button
+                          className="post-button"
+                          id="delete"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            setProfilePostDeleted(true);
+                            deletePost(post._id, token);
+                          }}
+                        >
+                          {<img src={deleteTrash} alt="trash icon" />}Delete
+                        </button>
+                      </>
+                    )}
+                    <div className="post-deleted">
+                      {profilePostDeleted ? "Post Deleted" : null}
+                    </div>
                   </div>
                 );
               })
@@ -93,12 +125,9 @@ const Profile = ({
                     <h4>From: {message.fromUser.username}</h4>
                     <br />
                     <p>{message.content}</p>
-                    <br /> 
+                    <br />
                     {userMessages[i].fromUser.username === username ? null : (
-                      <Messages 
-                      token={token}
-                      message={message}
-                      />
+                      <Messages token={token} message={message} />
                     )}
                   </div>
                 );
