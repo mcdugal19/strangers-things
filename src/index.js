@@ -24,7 +24,12 @@ function App() {
     <div className="app">
       <header>
         <h1>Stranger's Things</h1>
-        <Navbar />
+        <Navbar
+          setIsLoggedIn={setIsLoggedIn}
+          setUsername={setUsername}
+          setToken={setToken}
+          isLoggedIn={isLoggedIn}
+        />
         <br />
       </header>
       <div className="container">
