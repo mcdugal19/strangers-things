@@ -69,7 +69,7 @@ const editPostCard = ({ token, post }) => {
               placeholder="Location"
               value={editLocation}
               onChange={(e) => {
-                setLocation(e.target.value);
+                setEditLocation(e.target.value);
               }}
             />
             <label>Edit Will Deliver?</label>
