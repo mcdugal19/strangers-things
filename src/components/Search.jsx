@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router } from "react-router-dom";
+import { fetchPosts } from "../api/ajaxHelpers";
 
-const Search = ({posts, setPosts}) => {
+const Search = ({ posts, setPosts }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [clickedSearch, setClickedSearch] = useState(false);
+  const [clickedClear, setClickedClear] = useState(false);
 
   function postMatches(post, searchTerm) {
-    // return true if any of the fields you want to check against include the text
-    // strings have an .includes() method
+  
     if (
       post.title.includes(searchTerm) ||
       post.description.includes(searchTerm) ||
@@ -19,19 +19,21 @@ const Search = ({posts, setPosts}) => {
     }
   }
 
-
-
   useEffect(() => {
-    const filteredPostsArray = posts.filter((post) => 
+    const filteredPostsArray = posts.filter((post) =>
       postMatches(post, searchTerm)
     );
     setPosts(filteredPostsArray);
   }, [clickedSearch]);
 
- 
-  
+  useEffect(() => {
+    const getPosts = async () => {
+      const postsArray = await fetchPosts();
+      setPosts(postsArray);
+    };
+    getPosts();
+  }, [clickedClear]);
 
-  // then, in our jsx below... map over postsToDisplay instead of posts
 
   return (
     <form
@@ -52,6 +54,13 @@ const Search = ({posts, setPosts}) => {
         }}
       />
       <button type="submit">SEARCH</button>
+      <button
+        onClick={() => {
+          setClickedClear(!clickedClear);
+        }}
+      >
+        CLEAR
+      </button>
     </form>
   );
 };
