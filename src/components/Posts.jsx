@@ -4,6 +4,9 @@ import { SinglePost } from "./";
 import Search from "./Search";
 
 const Posts = ({ posts, setPosts, isLoggedIn, token, username }) => {
+  const [displaySearchPosts, setDisplaySearchPosts] = useState(false)
+  
+  
   useEffect(() => {
     const getPosts = async () => {
       const postsArray = await fetchPosts();
@@ -11,10 +14,11 @@ const Posts = ({ posts, setPosts, isLoggedIn, token, username }) => {
     };
     getPosts();
   }, [setPosts]);
-
+  
   return (
       <div className="post-page">
-      <Search posts={posts} setPosts={setPosts} />
+      <Search posts={posts} setPosts={setPosts} setDisplaySearchPosts={setDisplaySearchPosts}/>
+
         {posts.map((post, i) => {
           return (
             <SinglePost
