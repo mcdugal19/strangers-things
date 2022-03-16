@@ -79,8 +79,8 @@ export async function createPost(postObj, token) {
   const response = await fetch(`${APIURL}posts`, {
     method: "POST",
     headers: {
-      'Content-Type': "application/json",
-      'Authorization': `Bearer ${token}`,
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({
       post: {
@@ -92,16 +92,16 @@ export async function createPost(postObj, token) {
       },
     }),
   });
-  const data = await response.json()
-  return data
+  const data = await response.json();
+  return data;
 }
 
 export async function sendMessage(message, postId, token) {
   const response = await fetch(`${APIURL}posts/${postId}/messages`, {
     method: "POST",
     headers: {
-      'Content-Type': "application/json",
-      'Authorization': `Bearer ${token}`,
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({
       message: {
@@ -109,22 +109,20 @@ export async function sendMessage(message, postId, token) {
       },
     }),
   });
-  const data = await response.json()
-  return data
+  const data = await response.json();
+  return data;
 }
 
 export async function deletePost(postId, token) {
-  const response = await fetch(`${APIURL}posts/${postId}`,
-  {
+  const response = await fetch(`${APIURL}posts/${postId}`, {
     method: "DELETE",
     headers: {
-      'Content-Type': "application/json",
-      'Authorization': `Bearer ${token}`,
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
     },
-
   });
-  const data = await response.json()
-  return data
+  const data = await response.json();
+  return data;
 }
 
 export async function editPost(editPostObj, postId, token) {
