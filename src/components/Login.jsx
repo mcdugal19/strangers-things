@@ -7,8 +7,6 @@ const Login = ({
   setUsername,
   password,
   setPassword,
-  token,
-  setToken,
   isLoggedIn,
   setIsLoggedIn,
 }) => {

@@ -24,7 +24,6 @@ const Profile = ({
       try {
         if (isLoggedIn) {
           const response = await fetchUserData(token);
-          console.log(response);
           setUserPosts(response.data.posts);
           setUserMessages(response.data.messages);
           setUsername(response.data.username);

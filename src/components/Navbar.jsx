@@ -2,6 +2,31 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Navbar = ({ setIsLoggedIn, setUsername, setToken, isLoggedIn }) => {
+  const logoutButton = (
+    <li>
+      <Link
+        to="/"
+        onClick={() => {
+          setIsLoggedIn(false);
+          setUsername("");
+          localStorage.removeItem("token");
+          setToken("");
+        }}
+      >
+        Logout
+      </Link>
+    </li>
+  );
+  const logInRegisterButtons = (
+    <>
+      <li>
+        <Link to="/login">Login</Link>
+      </li>
+      <li>
+        <Link to="/register">Register</Link>
+      </li>
+    </>
+  );
   return (
     <nav className="navbar">
       <ul>
@@ -11,31 +36,8 @@ const Navbar = ({ setIsLoggedIn, setUsername, setToken, isLoggedIn }) => {
         <li>
           <Link to="/posts">Posts</Link>
         </li>
-        {!isLoggedIn ? (
-          <>
-            <li>
-              <Link to="/login">Login</Link>
-            </li>
-            <li>
-              <Link to="/register">Register</Link>
-            </li>
-          </>
-        ) : null}
-        {isLoggedIn ? (
-          <li>
-            <Link
-              to="/"
-              onClick={() => {
-                setIsLoggedIn(false);
-                setUsername("");
-                localStorage.removeItem("token");
-                setToken("");
-              }}
-            >
-              Logout
-            </Link>
-          </li>
-        ) : null}
+        {!isLoggedIn ? logInRegisterButtons : null}
+        {isLoggedIn ? logoutButton : null}
       </ul>
     </nav>
   );

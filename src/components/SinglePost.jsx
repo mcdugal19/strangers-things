@@ -3,17 +3,17 @@ import deleteTrash from "./images/deleteTrash.png";
 import editPencil from "./images/editPencil.png";
 import mailIcon from "./images/mailIcon.png";
 import { sendMessage, deletePost } from "../api/ajaxHelpers";
+import EditPostCard from "./EditPostCard";
 
-const SinglePost = ({ post, token, isLoggedin, username }) => {
+const SinglePost = ({ post, token, isLoggedIn, username }) => {
   const [message, setMessage] = useState("");
   const [clickedMessage, setClickedMessage] = useState(false);
   const [messageSent, setMessageSent] = useState(false);
-  
-  // const [clickedDelete, setClickedDelete] = useState(false);
+  const [clickedEdit, setClickedEdit] = useState(false);
   const [postDeleted, setPostDeleted] = useState(false);
-
-  return (
-    <div className="post-card">
+  const postCard = (
+    <>
+      {/* this postCard is the main framework for the individual posts */}
       <h3 className="post-title">{post.title}</h3>
       <h4 className="post-username">Posted by: {post.author.username}</h4>
       <h5 className="post-location">Location: {post.location}</h5>
@@ -37,8 +37,34 @@ const SinglePost = ({ post, token, isLoggedin, username }) => {
         ) : null}
       </span>
       <br />
-      {/* If user is logged in and is not the post author, display Message button */}
-      {isLoggedin && post.author.username !== username ? (
+    </>
+  );
+  const messageForm = (
+    // this form is for sending messages 
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        sendMessage(message, post._id, token);
+        setClickedMessage(false);
+        setMessageSent(true);
+      }}
+    >
+      <input
+        type="text"
+        placeholder="Message"
+        value={message}
+        onChange={(e) => {
+          setMessage(e.target.value);
+        }}
+      />
+      <button type="submit">Send</button>
+    </form>
+  );
+  const postButtons = (
+    // these are the buttons that also contain the edit post form and component link
+    <>
+      {/* If user is logged in and is not the post author, display Message button only */}
+      {isLoggedIn && post.author.username !== username ? (
         <button
           className="post-button"
           id="message"
@@ -51,9 +77,17 @@ const SinglePost = ({ post, token, isLoggedin, username }) => {
         </button>
       ) : null}
       {/* If user is logged in and is the post author, display Edit and Delete */}
-      {isLoggedin && post.author.username === username ? (
+      {isLoggedIn && post.author.username === username ? (
         <>
-          <button className="post-button" id="edit">
+          {/* the Edit button functions are in the file EditPostCard.jsx */}
+          <button
+            className="post-button"
+            id="edit"
+            onClick={(e) => {
+              e.preventDefault();
+              setClickedEdit(true);
+            }}
+          >
             {<img src={editPencil} alt="pencil icon" />} Edit
           </button>
           <button
@@ -69,30 +103,18 @@ const SinglePost = ({ post, token, isLoggedin, username }) => {
           </button>
         </>
       ) : null}
-      <div className="message-form">
-        {clickedMessage ? (
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              sendMessage(message, post._id, token);
-              setClickedMessage(false);
-              setMessageSent(true);
-            }}
-          >
-            <input
-              type="text"
-              placeholder="Message"
-              value={message}
-              onChange={(e) => {
-                setMessage(e.target.value);
-              }}
-            />
-            <button type="submit">Send</button>
-          </form>
-        ) : null}
+      <div className="editpost-form">
+        {clickedEdit ? <EditPostCard token={token} post={post} /> : null}
       </div>
+      <div className="message-form">{clickedMessage ? messageForm : null}</div>
       <div className="message-sent">{messageSent ? "Message Sent" : null}</div>
       <div className="post-deleted">{postDeleted ? "Post Deleted" : null}</div>
+    </>
+  );
+  return (
+    <div className="post-card">
+      {postCard}
+      {postButtons}
     </div>
   );
 };
