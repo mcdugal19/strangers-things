@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import deleteTrash from "./images/deleteTrash.png";
 import editPencil from "./images/editPencil.png";
-import { fetchUserData, sendMessage } from "../api/ajaxHelpers";
+import { fetchUserData } from "../api/ajaxHelpers";
 import Messages from "./Messages";
 // import {posts, setPosts, isLoggedIn, token, username} from "";
 // import {Search} from "./Search.jsx";
@@ -44,6 +44,7 @@ const Profile = ({
         </div>
       ) : (
         <div className="profile-page">
+          {/* This section is used to display the User's Posts */}
           <div className="post-page">
             {userPosts.length === 0 ? (
               <h2>No Posts Yet</h2>
@@ -82,6 +83,8 @@ const Profile = ({
               })
             )}
           </div>
+
+              {/* This section is used to display Messages sent to the user */}
           <div className="newpost-page">
             {userMessages.length === 0 ? (
               <h2>No Messages Yet</h2>

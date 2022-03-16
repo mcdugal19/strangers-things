@@ -8,9 +8,7 @@ const SinglePost = ({ post, token }) => {
   const [message, setMessage] = useState("");
   const [clickedMessage, setClickedMessage] = useState(false);
   const [messageSent, setMessageSent] = useState(false);
-  const [editPostCard, setEditPostCard] = useState("");
-  const [clickedEditCard, setClickedEditPostCard] = useState(false);
-  const [PostEdited, setPostEdited] = useState(false);
+  
   // const [clickedDelete, setClickedDelete] = useState(false);
   const [postDeleted, setPostDeleted] = useState(false);
 
@@ -35,6 +33,7 @@ const SinglePost = ({ post, token }) => {
         ) : null}
       </span>
       <br />
+      {/* Button Display */}
       <button
         className="post-button"
         id="message"
@@ -55,6 +54,7 @@ const SinglePost = ({ post, token }) => {
           deletePost(post._id, token);
         }}/>}Delete
       </button>
+    {/* When an authenticated user clicks the message button the form below pops out to enable messaging */}
       <div className="message-form">
         {clickedMessage ? (
           <form
