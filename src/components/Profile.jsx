@@ -44,6 +44,7 @@ const Profile = ({
         </div>
       ) : (
         <div className="profile-page">
+          {/* This section is used to display the User's Posts */}
           <div className="post-page">
             {userPosts.length === 0 ? (
               <h2>No Posts Yet</h2>
@@ -114,6 +115,8 @@ const Profile = ({
               })
             )}
           </div>
+
+              {/* This section is used to display Messages sent to the user */}
           <div className="newpost-page">
             {userMessages.length === 0 ? (
               <h2>No Messages Yet</h2>

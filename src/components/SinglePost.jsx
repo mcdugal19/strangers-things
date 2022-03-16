@@ -8,9 +8,7 @@ const SinglePost = ({ post, token, isLoggedin, username }) => {
   const [message, setMessage] = useState("");
   const [clickedMessage, setClickedMessage] = useState(false);
   const [messageSent, setMessageSent] = useState(false);
-  const [editPostCard, setEditPostCard] = useState("");
-  const [clickedEditCard, setClickedEditPostCard] = useState(false);
-  const [PostEdited, setPostEdited] = useState(false);
+  
   // const [clickedDelete, setClickedDelete] = useState(false);
   const [postDeleted, setPostDeleted] = useState(false);
 

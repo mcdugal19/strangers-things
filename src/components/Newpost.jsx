@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { createPost } from "../api/ajaxHelpers";
 
+// this component is responsible for creating new posts and is displayed on the right-hand side of the *Posts page//
+
+
 const NewPost = ({ token, posts, setPosts, isLoggedIn }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
   const [location, setLocation] = useState("");
   const [willDeliver, setWillDeliver] = useState(false);
-
-  // useEffect(()=> {
-
-  // }, [])
 
   return (
     <div className="newpost-page">

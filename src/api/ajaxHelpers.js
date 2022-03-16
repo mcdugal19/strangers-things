@@ -124,3 +124,26 @@ export async function deletePost(postId, token) {
   const data = await response.json();
   return data;
 }
+
+export async function editPost(editPostObj, postId, token) {
+  const response = await fetch(`${APIURL}posts/${postId}`,
+  {
+    method: "PATCH",
+    headers: {
+      'Content-Type': "application/json",
+      'Authorization': `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      post: {
+        title: editPostObj.title,
+        description: editPostObj.description,
+        location: editPostObj.location,
+        price: editPostObj.price,
+        willDeliver: editPostObj.willDeliver,
+      },
+    }),
+
+  });
+  const data = await response.json()
+  return data
+}
