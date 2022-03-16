@@ -19,13 +19,14 @@ const EditPostCard = ({ token, post }) => {
           e.preventDefault();
           try {
             const editPostObj = {
-              editTitle,
-              editDescription,
-              editPrice,
-              editLocation,
-              editWillDeliver,
+              title: editTitle,
+              description: editDescription,
+              price: editPrice,
+              location: editLocation,
+              willDeliver: editWillDeliver,
             };
             const response = await editPost(editPostObj, post._id, token);
+            const editedPost = response.data.post;
             setPostEdited(true);
           } catch (error) {
             console.error(error);

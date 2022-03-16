@@ -19,7 +19,7 @@ function App() {
       setToken(localStorageToken);
     }
   }, []);
-  console.log('username', username)
+  console.log('token', token)
 
   return (
     <div className="app">
