@@ -3,8 +3,8 @@ import deleteTrash from "./images/deleteTrash.png";
 import editPencil from "./images/editPencil.png";
 import { fetchUserData, deletePost } from "../api/ajaxHelpers";
 import Messages from "./Messages";
-// import {posts, setPosts, isLoggedIn, token, username} from "";
-// import {Search} from "./Search.jsx";
+import EditPostCard from "./EditPostCard";
+
 
 const Profile = ({
   userPosts,
@@ -15,10 +15,12 @@ const Profile = ({
   setUsername,
   userMessages,
   setUserMessages,
-  setToken,
+
 }) => {
   const [profilePostDeleted, setProfilePostDeleted] = useState(false);
+  const [clickedEdit, setClickedEdit] = useState(false);
 
+  // The below useEffect is responsible for retrieving and filtering the user's posts and messages
   useEffect(() => {
     const getUserData = async () => {
       try {
@@ -35,6 +37,8 @@ const Profile = ({
     getUserData();
   }, []);
 
+  // The Profile page will only display if the user is logged in
+  // The below sections display both the user's posts and the user's messages
   return (
     <>
       {!isLoggedIn ? (
@@ -91,7 +95,14 @@ const Profile = ({
                     <div className="button-container">
                       {!post.active ? null : (
                         <>
-                          <button className="post-button" id="edit">
+                          <button
+                            className="post-button"
+                            id="edit"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              setClickedEdit(!clickedEdit);
+                            }}
+                          >
                             {<img src={editPencil} alt="pencil icon" />}Edit
                           </button>
                           <button
@@ -107,6 +118,18 @@ const Profile = ({
                           </button>
                         </>
                       )}
+                    </div>
+                    {/* the below section opens the EditPost form */}
+                    <div className="editpost-form">
+                      {clickedEdit ? (
+                        <EditPostCard
+                          setClickedEdit={setClickedEdit}
+                          posts={userPosts}
+                          setPosts={setUserPosts}
+                          token={token}
+                          post={post}
+                        />
+                      ) : null}
                     </div>
                     <div className="post-deleted">
                       {profilePostDeleted ? "Post Deleted" : null}
@@ -130,6 +153,7 @@ const Profile = ({
                     <br />
                     <p>{message.content}</p>
                     <br />
+                    {/* This section is to open the Reply form to messages directed to the user */}
                     {userMessages[i].fromUser.username === username ? null : (
                       <Messages token={token} message={message} />
                     )}
@@ -146,7 +170,3 @@ const Profile = ({
 
 export default Profile;
 
-// function convertTime(){
-//     let {post.createdAt} = APItime;
-//     let displayTime =
-// }

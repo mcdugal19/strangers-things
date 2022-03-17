@@ -13,6 +13,7 @@ const NewPost = ({ token, posts, setPosts, isLoggedIn }) => {
 
   return (
     <div className="newpost-page">
+      {/* The below form is only displayed when the user is logged in */}
       {!isLoggedIn ? (
         <div className="newpost-form">Please log in/register to create posts
         or send messages.</div>

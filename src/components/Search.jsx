@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { fetchPosts } from "../api/ajaxHelpers";
 
+// this component displays a search bar above the posts section and filters the posts based on keywords
+
 const Search = ({ posts, setPosts }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [clickedSearch, setClickedSearch] = useState(false);
@@ -19,6 +21,7 @@ const Search = ({ posts, setPosts }) => {
     }
   }
 
+  // The useEffects below display the filtered results and allows a clear button to return the state to all posts
   useEffect(() => {
     const filteredPostsArray = posts.filter((post) =>
       postMatches(post, searchTerm)

@@ -2,6 +2,7 @@ import { useState, } from "react";
 import { sendMessage } from "../api/ajaxHelpers";
 import React from "react";
 
+// The below form is referenced inside the Profile section and displays the reply form for each message
 const Messages = ({token, message}) => {
   const [reply, setReply] = useState("");
   const [replySent, setReplySent] = useState(false);

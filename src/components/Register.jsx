@@ -7,7 +7,6 @@ const Register = ({
   setUsername,
   password,
   setPassword,
-  token,
   setToken,
   isLoggedIn,
   setIsLoggedIn,
@@ -17,6 +16,7 @@ const Register = ({
       <h2>Welcome to Stranger's Things</h2>
 
       <div className="form-container">
+        {/* The form below is the form that creates a new username and password */}
         <form
           action=""
           onSubmit={async (e) => {
@@ -50,6 +50,7 @@ const Register = ({
             }}
           />
           <button type="submit">Sign Up</button>
+          {/* the below section only displays after a successful user registration */}
           <div
             className="login-confirmation"
             style={{

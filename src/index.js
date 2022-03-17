@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import alienIcon from "./images/alienIcon.png";
-
 import { Posts, Navbar, NewPost, Profile, Login, Register } from "./components";
 
 function App() {
@@ -25,13 +24,15 @@ function App() {
     <div className="app">
       <header>
         <h1>Stranger's Things</h1>
+        <h2>Get these things before THEY do!</h2>
         {isLoggedIn ? (
           <div className="is-logged-in">
             <img src={alienIcon} alt="user icon" />
             {username}
           </div>
         ) : null}
-      </header>
+      </header> 
+      {/* The below section links to the Navbar component */}
       <Navbar
         setIsLoggedIn={setIsLoggedIn}
         setUsername={setUsername}
@@ -41,6 +42,7 @@ function App() {
       />
       <br />
       <div className="container">
+        {/* The below section displays the different routes available for display*/}
         <Switch>
           <Route exact path="/">
             <Posts
@@ -76,9 +78,6 @@ function App() {
             />
           </Route>
 
-          <Route path="/NewPost">
-            <NewPost />
-          </Route>
 
           <Route path="/profile">
             <Profile

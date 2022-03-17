@@ -1,4 +1,3 @@
-// all components that help us edit a post should go here
 import { useState } from "react";
 import { editPost } from "../api/ajaxHelpers";
 import React from "react";
@@ -10,6 +9,9 @@ const EditPostCard = ({ token, post, posts, setPosts, setClickedEdit }) => {
   const [editLocation, setEditLocation] = useState("");
   const [editWillDeliver, setEditWillDeliver] = useState(false);
 
+  // the below return statement is the drop-down fillable form for editing posts
+  // each item is wrapped inside of ternarys to allow for optional editing
+  
   return (
     <>
       <form
@@ -30,12 +32,12 @@ const EditPostCard = ({ token, post, posts, setPosts, setClickedEdit }) => {
             };
             const response = await editPost(editPostObj, post._id, token);
             const editedPost = response.data.post;
-            const filteredPosts = posts.filter((postObj)=> {
-              return postObj._id  !== editedPost._id
-            })
+            const filteredPosts = posts.filter((postObj) => {
+              return postObj._id !== editedPost._id;
+            });
             const newArr = [editedPost, ...filteredPosts];
             setPosts(newArr);
-            setClickedEdit(false)
+            setClickedEdit(false);
           } catch (error) {
             console.error(error);
           }

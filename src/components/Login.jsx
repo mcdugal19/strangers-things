@@ -1,5 +1,4 @@
 import React from "react";
-
 import { fetchUserToken } from "../api/ajaxHelpers";
 
 const Login = ({
@@ -9,12 +8,12 @@ const Login = ({
   setPassword,
   isLoggedIn,
   setIsLoggedIn,
-  token,
   setToken,
 }) => {
   return (
     <div className="login-page">
       <h2>Welcome Back</h2>
+      {/* The form below is the form that verifies login credentials */}
       <div className="form-container">
         <form
           action=""
@@ -52,6 +51,7 @@ const Login = ({
           <button type="submit">Log in</button>
         </form>
       </div>
+       {/* the below section only displays after a successful user login */}
       <div
         className="login-confirmation"
         style={{

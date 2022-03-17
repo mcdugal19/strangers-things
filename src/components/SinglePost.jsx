@@ -10,7 +10,6 @@ const SinglePost = ({ post, token, isLoggedIn, username, posts, setPosts }) => {
   const [clickedMessage, setClickedMessage] = useState(false);
   const [messageSent, setMessageSent] = useState(false);
   const [clickedEdit, setClickedEdit] = useState(false);
-  const [postDeleted, setPostDeleted] = useState(false);
   const postCard = (
     <>
       {/* this postCard is the main framework for the individual posts */}
@@ -42,7 +41,7 @@ const SinglePost = ({ post, token, isLoggedIn, username, posts, setPosts }) => {
   );
   const messageForm = (
     // this form is for sending messages
-    <form
+    <form 
       onSubmit={(e) => {
         e.preventDefault();
         sendMessage(message, post._id, token);
@@ -66,13 +65,13 @@ const SinglePost = ({ post, token, isLoggedIn, username, posts, setPosts }) => {
     <>
       {/* If user is logged in and is not the post author, display Message button only */}
       <div className="button-container">
-        {isLoggedIn && post.author.username !== username && !clickedMessage ? (
+        {isLoggedIn && post.author.username !== username ? (
           <button
             className="post-button"
             id="message"
             onClick={(e) => {
               e.preventDefault();
-              setClickedMessage(true);
+              setClickedMessage(!clickedMessage);
             }}
           >
             {<img src={mailIcon} alt="message icon" />} Message
@@ -87,7 +86,7 @@ const SinglePost = ({ post, token, isLoggedIn, username, posts, setPosts }) => {
               id="edit"
               onClick={(e) => {
                 e.preventDefault();
-                setClickedEdit(true);
+                setClickedEdit(!clickedEdit);
               }}
             >
               {<img src={editPencil} alt="pencil icon" />} Edit
@@ -97,7 +96,6 @@ const SinglePost = ({ post, token, isLoggedIn, username, posts, setPosts }) => {
               id="delete"
               onClick={(e) => {
                 e.preventDefault();
-                setPostDeleted(true);
                 deletePost(post._id, token);
                 const filteredPosts = posts.filter((postObj) => {
                   return postObj._id !== post._id;
@@ -110,6 +108,7 @@ const SinglePost = ({ post, token, isLoggedIn, username, posts, setPosts }) => {
           </>
         ) : null}
       </div>
+      {/* This is form for editing a post and will only display if user is logged in and clicks the edit button*/}
       <div className="editpost-form">
         {clickedEdit ? (
           <EditPostCard
