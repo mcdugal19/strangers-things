@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import deleteTrash from "./images/deleteTrash.png";
 import editPencil from "./images/editPencil.png";
-import { fetchUserData, sendMessage, deletePost } from "../api/ajaxHelpers";
+import { fetchUserData, deletePost } from "../api/ajaxHelpers";
 import Messages from "./Messages";
 // import {posts, setPosts, isLoggedIn, token, username} from "";
 // import {Search} from "./Search.jsx";
@@ -36,7 +36,7 @@ const Profile = ({
   }, []);
 
   return (
-    <div className="container">
+    <>
       {!isLoggedIn ? (
         <div className="post-page">
           Please log in/register to create posts or send messages.
@@ -88,24 +88,26 @@ const Profile = ({
                       ) : null}
                     </span>
                     <br />
-                    {!post.active ? null : (
-                      <>
-                        <button className="post-button" id="edit">
-                          {<img src={editPencil} alt="pencil icon" />}Edit
-                        </button>
-                        <button
-                          className="post-button"
-                          id="delete"
-                          onClick={(e) => {
-                            e.preventDefault();
-                            setProfilePostDeleted(true);
-                            deletePost(post._id, token);
-                          }}
-                        >
-                          {<img src={deleteTrash} alt="trash icon" />}Delete
-                        </button>
-                      </>
-                    )}
+                    <div className="button-container">
+                      {!post.active ? null : (
+                        <>
+                          <button className="post-button" id="edit">
+                            {<img src={editPencil} alt="pencil icon" />}Edit
+                          </button>
+                          <button
+                            className="post-button"
+                            id="delete"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              setProfilePostDeleted(true);
+                              deletePost(post._id, token);
+                            }}
+                          >
+                            {<img src={deleteTrash} alt="trash icon" />}Delete
+                          </button>
+                        </>
+                      )}
+                    </div>
                     <div className="post-deleted">
                       {profilePostDeleted ? "Post Deleted" : null}
                     </div>
@@ -115,7 +117,7 @@ const Profile = ({
             )}
           </div>
 
-              {/* This section is used to display Messages sent to the user */}
+          {/* This section is used to display Messages sent to the user */}
           <div className="message-page">
             {userMessages.length === 0 ? (
               <h2>No Messages Yet</h2>
@@ -138,7 +140,7 @@ const Profile = ({
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 };
 

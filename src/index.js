@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import alienIcon from "./images/alienIcon.png";
 
 import { Posts, Navbar, NewPost, Profile, Login, Register } from "./components";
 
@@ -18,22 +19,27 @@ function App() {
     if (localStorageToken) {
       setToken(localStorageToken);
     }
-  }, [token]);
-  console.log('token', token)
+  }, []);
 
   return (
     <div className="app">
       <header>
         <h1>Stranger's Things</h1>
-        <Navbar
-          setIsLoggedIn={setIsLoggedIn}
-          setUsername={setUsername}
-          setPassword={setPassword}
-          setToken={setToken}
-          isLoggedIn={isLoggedIn}
-        />
-        <br />
+        {isLoggedIn ? (
+          <div className="is-logged-in">
+            <img src={alienIcon} alt="user icon" />
+            {username}
+          </div>
+        ) : null}
       </header>
+      <Navbar
+        setIsLoggedIn={setIsLoggedIn}
+        setUsername={setUsername}
+        setPassword={setPassword}
+        setToken={setToken}
+        isLoggedIn={isLoggedIn}
+      />
+      <br />
       <div className="container">
         <Switch>
           <Route exact path="/">

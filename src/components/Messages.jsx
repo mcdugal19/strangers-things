@@ -1,5 +1,3 @@
-//need sendMessage from ajax
-//need the two Usestates reply and replysent
 import { useState, } from "react";
 import { sendMessage } from "../api/ajaxHelpers";
 import React from "react";

@@ -10,7 +10,6 @@ const Navbar = ({ setIsLoggedIn, setUsername, setPassword, setToken, isLoggedIn 
           setIsLoggedIn(false);
           setUsername("");
           setPassword("");
-          localStorage.removeItem("token");
           setToken("");
         }}
       >

@@ -23,7 +23,7 @@ const Register = ({
             e.preventDefault();
             try {
               const response = await registerUser(username, password);
-              localStorage.setItem("token", response);
+              setToken(response);
               setIsLoggedIn(true);
             } catch (error) {
               console.error(
@@ -56,7 +56,7 @@ const Register = ({
               display: isLoggedIn ? "block" : "none",
             }}
           >
-            <h3>WELCOME TO STRANGER'S THINGS!</h3>
+            <h3>REGISTRATION COMPLETE!</h3>
           </div>
         </form>
       </div>
