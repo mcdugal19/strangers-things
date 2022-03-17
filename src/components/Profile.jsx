@@ -116,7 +116,7 @@ const Profile = ({
           </div>
 
               {/* This section is used to display Messages sent to the user */}
-          <div className="newpost-page">
+          <div className="message-page">
             {userMessages.length === 0 ? (
               <h2>No Messages Yet</h2>
             ) : (

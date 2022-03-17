@@ -16,6 +16,7 @@ const SinglePost = ({ post, token, isLoggedIn, username, posts, setPosts }) => {
       {/* this postCard is the main framework for the individual posts */}
       <h3 className="post-title">{post.title}</h3>
       <h4 className="post-username">Posted by: {post.author.username}</h4>
+      <br />
       <h5 className="post-location">Location: {post.location}</h5>
       <h6 className="post-deliver">
         Will deliver? {post.willDeliver ? "Yes" : "No"}

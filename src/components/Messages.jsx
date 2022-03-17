@@ -16,7 +16,8 @@ const Messages = ({token, message}) => {
           setReplySent(true);
         }}
       >
-        <input
+        <input className="message-input"
+          placeholder="Reply"
           type="text"
           value={reply}
           onChange={(e) => {
