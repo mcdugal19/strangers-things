@@ -40,7 +40,7 @@ const SinglePost = ({ post, token, isLoggedIn, username, posts, setPosts }) => {
     </>
   );
   const messageForm = (
-    // this form is for sending messages 
+    // this form is for sending messages
     <form
       onSubmit={(e) => {
         e.preventDefault();
@@ -64,51 +64,64 @@ const SinglePost = ({ post, token, isLoggedIn, username, posts, setPosts }) => {
     // these are the buttons that also contain the edit post form and component link
     <>
       {/* If user is logged in and is not the post author, display Message button only */}
-      {isLoggedIn && post.author.username !== username ? (
-        <button
-          className="post-button"
-          id="message"
-          onClick={(e) => {
-            e.preventDefault();
-            setClickedMessage(true);
-          }}
-        >
-          {<img src={mailIcon} alt="message icon" />} Message
-        </button>
-      ) : null}
-      {/* If user is logged in and is the post author, display Edit and Delete */}
-      {isLoggedIn && post.author.username === username ? (
-        <>
-          {/* the Edit button functions are in the file EditPostCard.jsx */}
+      <div className="button-container">
+        {isLoggedIn && post.author.username !== username && !clickedMessage ? (
           <button
             className="post-button"
-            id="edit"
+            id="message"
             onClick={(e) => {
               e.preventDefault();
-              setClickedEdit(true);
+              setClickedMessage(true);
             }}
           >
-            {<img src={editPencil} alt="pencil icon" />} Edit
+            {<img src={mailIcon} alt="message icon" />} Message
           </button>
-          <button
-            className="post-button"
-            id="delete"
-            onClick={(e) => {
-              e.preventDefault();
-              setPostDeleted(true);
-              deletePost(post._id, token);
-            }}
-          >
-            {<img src={deleteTrash} alt="trash icon" />}Delete
-          </button>
-        </>
-      ) : null}
+        ) : null}
+        {/* If user is logged in and is the post author, display Edit and Delete */}
+        {isLoggedIn && post.author.username === username ? (
+          <>
+            {/* the Edit button functions are in the file EditPostCard.jsx */}
+            <button
+              className="post-button"
+              id="edit"
+              onClick={(e) => {
+                e.preventDefault();
+                setClickedEdit(true);
+              }}
+            >
+              {<img src={editPencil} alt="pencil icon" />} Edit
+            </button>
+            <button
+              className="post-button"
+              id="delete"
+              onClick={(e) => {
+                e.preventDefault();
+                setPostDeleted(true);
+                deletePost(post._id, token);
+                const filteredPosts = posts.filter((postObj) => {
+                  return postObj._id !== post._id;
+                });
+                setPosts(filteredPosts);
+              }}
+            >
+              {<img src={deleteTrash} alt="trash icon" />}Delete
+            </button>
+          </>
+        ) : null}
+      </div>
       <div className="editpost-form">
-        {clickedEdit ? <EditPostCard setClickedEdit={setClickedEdit} posts={posts} setPosts={setPosts} token={token} post={post} /> : null}
+        {clickedEdit ? (
+          <EditPostCard
+            setClickedEdit={setClickedEdit}
+            posts={posts}
+            setPosts={setPosts}
+            token={token}
+            post={post}
+          />
+        ) : null}
       </div>
       <div className="message-form">{clickedMessage ? messageForm : null}</div>
       <div className="message-sent">{messageSent ? "Message Sent" : null}</div>
-      <div className="post-deleted">{postDeleted ? "Post Deleted" : null}</div>
     </>
   );
   return (

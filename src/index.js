@@ -28,6 +28,7 @@ function App() {
         <Navbar
           setIsLoggedIn={setIsLoggedIn}
           setUsername={setUsername}
+          setPassword={setPassword}
           setToken={setToken}
           isLoggedIn={isLoggedIn}
         />

@@ -44,7 +44,7 @@ const EditPostCard = ({ token, post, posts, setPosts, setClickedEdit }) => {
         <label>Edit Title</label>
         <input
           type="text"
-          placeholder="New title here"
+          placeholder="Optional edited title"
           value={editTitle}
           onChange={(e) => {
             setEditTitle(e.target.value);
@@ -52,7 +52,7 @@ const EditPostCard = ({ token, post, posts, setPosts, setClickedEdit }) => {
         />
         <label>Edit Description</label>
         <textarea
-          placeholder="New post here"
+          placeholder="Optional edited description"
           value={editDescription}
           onChange={(e) => {
             setEditDescription(e.target.value);
@@ -61,7 +61,7 @@ const EditPostCard = ({ token, post, posts, setPosts, setClickedEdit }) => {
         <label>Edit Price</label>
         <input
           type="text"
-          placeholder="Price"
+          placeholder="Optional edited price"
           value={editPrice}
           onChange={(e) => {
             setEditPrice(e.target.value);
@@ -70,7 +70,7 @@ const EditPostCard = ({ token, post, posts, setPosts, setClickedEdit }) => {
         <label>Edit Location</label>
         <input
           type="text"
-          placeholder="Location"
+          placeholder="Optional edited location"
           value={editLocation}
           onChange={(e) => {
             setEditLocation(e.target.value);

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Navbar = ({ setIsLoggedIn, setUsername, setToken, isLoggedIn }) => {
+const Navbar = ({ setIsLoggedIn, setUsername, setPassword, setToken, isLoggedIn }) => {
   const logoutButton = (
     <li>
       <Link
@@ -9,6 +9,7 @@ const Navbar = ({ setIsLoggedIn, setUsername, setToken, isLoggedIn }) => {
         onClick={() => {
           setIsLoggedIn(false);
           setUsername("");
+          setPassword("");
           localStorage.removeItem("token");
           setToken("");
         }}
